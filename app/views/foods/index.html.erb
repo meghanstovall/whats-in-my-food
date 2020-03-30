@@ -1,7 +1,10 @@
 <h1> <%= @total %> Results </h1>
 
 <% @food_items.each do |food| %>
-  <section class="foods">
-
-  </section>
+  <ul class="foods">
+    <li id="gtin"> GTIN/UPC: <%= food.gtin_upc %> </li>
+    <li id="description"> Description: <%= food.description %> </li>
+    <li id="owner"> Brand Owner: <%= food.brand_owner %> </li>
+    <li id="ingredients"> Ingredients: <%= food.ingredients %> </li>
+  </ul>
 <% end %>
