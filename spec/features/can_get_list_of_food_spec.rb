@@ -1,8 +1,7 @@
 
 
 
-# Then I should see a total of the number of items returned by the search.
-# Then I should see a list of ten foods that contain the ingredient "sweet potatoes"
+
 # And for each of the foods I should see:
 # - The food's GTIN/UPC code
 # - The food's description
@@ -20,5 +19,9 @@ describe "FoodData Central API" do
     click_on "Search"
 
     expect(current_path).to eq("/foods")
+
+    expect(current_path).to eq('/foods')
+    expect(page).to have_content('Total Items: 531')
+    expect(page).to have_css('.foods', count: 10)
   end
 end
