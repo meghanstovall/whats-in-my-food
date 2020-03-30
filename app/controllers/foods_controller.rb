@@ -4,16 +4,18 @@ class FoodsController < ApplicationController
 
     conn = Faraday.new(url: "https://api.nal.usda.gov") do |faraday|
       faraday.headers["X-API-KEY"] = ENV["FOOD_DATA_API_KEY"]
-      faraday.params['q'] = params['q']
-      faraday.params['max'] = 10
-      faraday.adapter Faraday.default_adapter
     end
 
-    response = conn.get('/ndb/search/')
+    response = conn.get("/fdc/v1/search?api_key=#{ENV['FOOD_DATA_API_KEY']}\&generalSearchInput=#{food}")
 
-    total_items = JSON.parse(response.body, symbolize_names: true)[:list][:total]
-    items = JSON.parse(response.body, symbolize_names: true)[:list][:item]
+    json = JSON.parse(response.body, symbolize_names: true)
+    @total = json[:totalHits]
 
-    require "pry"; binding.pry
+    json1 = JSON.parse(response.body, symbolize_names: true)
+    items = json1[:foods]
+
+    @food_items = items.map do |item|
+      Food.new(item)
+    end
   end
 end
