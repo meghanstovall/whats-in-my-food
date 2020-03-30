@@ -16,6 +16,6 @@ class FoodsController < ApplicationController
 
     @food_items = items.map do |item|
       Food.new(item)
-    end
+    end[0..9]
   end
 end
