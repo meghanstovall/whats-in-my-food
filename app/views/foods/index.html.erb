@@ -1,5 +1,6 @@
 <h1> <%= @total %> Results </h1>
 
+<h3> Top 10 Results</h3>
 <% @food_items.each do |food| %>
   <ul class="foods">
     <li id="gtin"> GTIN/UPC: <%= food.gtin_upc %> </li>

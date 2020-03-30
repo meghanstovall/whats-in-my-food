@@ -1,13 +1,3 @@
-
-
-
-
-# And for each of the foods I should see:
-# - The food's GTIN/UPC code
-# - The food's description
-# - The food's Brand Owner
-# - The food's ingredients
-
 require 'rails_helper'
 
 describe "FoodData Central API" do
@@ -21,6 +11,7 @@ describe "FoodData Central API" do
     expect(current_path).to eq("/foods")
 
     expect(page).to have_content('32696 Results')
+    expect(page).to have_content('Top 10 Results')
     expect(page).to have_css('.foods', count: 10)
     expect(page).to have_css('#gtin', count: 10)
     expect(page).to have_css('#description', count: 10)

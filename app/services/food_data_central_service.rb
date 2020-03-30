@@ -1,13 +1,16 @@
 class FoodDataCentralService
 
-
-  private
-
-  def conn
-    Faraday.new(url: "https://api.nal.usda.gov") do |faraday|
-      faraday.headers["X-API-KEY"] = ENV["FOOD_DATA_API_KEY"]
-    end
+  def get_foods(food)
+    get_json("/fdc/v1/search?api_key=#{ENV['FOOD_DATA_API_KEY']}\&generalSearchInput=#{food}")
   end
 
-  response = conn.get("/fdc/v1/search?api_key=#{ENV['FOOD_DATA_API_KEY']}\&generalSearchInput=#{food}")
+  private
+    def get_json(url)
+      response = conn.get(url)
+      JSON.parse(response.body, symbolize_names: true)
+    end
+
+    def conn
+      Faraday.new(url: "https://api.nal.usda.gov")
+    end
 end
